@@ -71,16 +71,103 @@ Csv :
 ```
 # 처음 5줄을 봅니다.
 print(df.head(5))
+```
+<img src="https://user-images.githubusercontent.com/54765256/90971207-74e82b80-e548-11ea-89e1-6db65b4ee6ec.png">
 
+```
 # 데이터의 전반적인 정보를 확인해 봅니다.
 print(df.info())
-
+```
+<img src="https://user-images.githubusercontent.com/54765256/90971219-9a753500-e548-11ea-956e-9570cafdb5f7.png">
+```
 # 각 정보별 특징을 좀더 자세히 출력합니다.
 print(df.describe())
-
+```
+<img src="https://user-images.githubusercontent.com/54765256/90971228-aeb93200-e548-11ea-8f9f-f716565dddc3.png">
+```
 # 데이터 중 임신 정보와 클래스 만을 출력해 봅니다.
 print(df[['plasma', 'class']])
 ```
+<img src="https://user-images.githubusercontent.com/54765256/90971236-c85a7980-e548-11ea-8532-d29657a6cbd3.png">
+
+데이터를 잘 다루려면 데이터를 한 번 더 가공해야 함
+
+데이터를 가공할 때 우리가 무엇을 위해 작업을 하는지 그 목적을 잊어서는 안 됨
+
+이 프로젝트의 목적은 당뇨병 발병을 예측하는 것
+
+모든 정보는 당뇨병 발병과 어떤 관계가 있는지를 중점에 놓아야 함
+
+앞서 살펴본 임신 횟수와 당뇨병 발병 확률의 경우 다음과 같이 계산할 수 있음
+```
+print(df[['pregnant','class']].groupby(['pregnant'], as_index=False).mean().sort_values(by='pregnant',ascending=True))
+```
+groupby() 함수를 사용해 pregnant 정보를 기준으로 하는 새 그룹을 만듦
+
+as_index=False는 pregnant 정보 옆에 새로운 인덱스(index)를 만듦
+
+mean() 함수를 사용해 평균을 구하고 sort_values() 함수를 써서 pregnant 컬럼을 오름차순(ascending)으로 정리하게끔 설정함
+
+이를 출력하면 다음과 같이 임신 횟수당 당뇨병 발병 확률을 구할 수 있음
+
+```
+    pregnant     class
+0          0  0.342342
+1          1  0.214815
+2          2  0.184466
+3          3  0.360000
+4          4  0.338235
+5          5  0.368421
+6          6  0.320000
+7          7  0.555556
+8          8  0.578947
+9          9  0.642857
+10        10  0.416667
+11        11  0.636364
+12        12  0.444444
+13        13  0.500000
+14        14  1.000000
+15        15  1.000000
+16        17  1.000000
+```
+
+## matplotlib를 이용해 그래프로 표현하기
+```
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# 데이터 간의 상관관계를 그래프로 표현해 봅니다.
+
+colormap = plt.cm.gist_heat   #그래프의 색상 구성을 정합니다.
+plt.figure(figsize=(12,12))   #그래프의 크기를 정합니다.
+
+# 그래프의 속성을 결정합니다. vmax의 값을 0.5로 지정해 0.5에 가까울 수록 밝은 색으로 표시되게 합니다.
+sns.heatmap(df.corr(),linewidths=0.1,vmax=0.5, cmap=colormap, linecolor='white', annot=True)
+plt.show()
+```
+<img src="https://user-images.githubusercontent.com/54765256/90971510-ce9e2500-e54b-11ea-878f-b64434e48340.png">
+
+그래프를 통해 plasma 항목(공복 혈당 농도)이 class 항목과 가장 상관관계가 높다는 것을 알 수 있음
+
+즉, 이 항목이 결론을 만드는 데 가장 중요한 역할을 한다는 것을 예측할 수 있음
+
+이제 plasma와 class 항목만 따로 떼어 두 항목 간의 관계를 그래프로 다시 한번 확인함
+
+```
+grid = sns.FacetGrid(df, col='class')
+grid.map(plt.hist, 'plasma',  bins=10)
+plt.show()
+
+```
+
+
+
+
+
+
+
+
+
 
 
 
