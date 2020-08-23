@@ -60,11 +60,42 @@ plt.show()
 ```
 <img src="https://user-images.githubusercontent.com/54765256/90973007-ee881580-e558-11ea-9d3c-c0726465df72.png">
 
+그래프를 보니, 사진으로 볼 때는 비슷해 보이던 꽃잎과 꽃받침의 크기와 너비가 품종별로 차이가 있음을 알 수 있음
 
+속성별로 어떤 연관이 있는지를 보여 주는 상관도 그래프를 통해 프로젝트의 감을 잡고 프로그램 전략을 세울 수 있음
 
+이제 케라스를 이용해 아이리스의 품종을 예측해 보자
 
+Iris-setosa, Iris-virginica 등 데이터 안에 문자열이 포함되어 있음
+                                    
+numpy보다는 pandas로 데이터를 불러와 X와 Y값을 구분하는 것이 좋음
+```
+# 데이터 분류
+dataset = df.values
+X = dataset[:,0:4].astype(float)
+Y_obj = dataset[:,4]
 
+# 문자열을 숫자로 변환
+e = LabelEncoder()
+e.fit(Y_obj)
+Y = e.transform(Y_obj)
+Y_encoded = np_utils.to_categorical(Y)
+```
+또한, Y값이 이번에는 숫자가 아니라 문자열임
 
+문자열을 숫자로 바꿔 주려면 클래스 이름을 숫자 형태로 바꿔 주어야 함
+
+이를 가능하게 하는 함수가 sklearn 라이브러리의 LabelEncoder( ) 함수임
+
+## 원-핫 인코딩
+
+array(['Iris-setosa', 'Iris-versicolor','Iris-virginica'])가 array([1,2,3])로 바뀜
+
+활성화 함수를 적용하려면 Y 값이 숫자 0과 1로 이루어져 있어야 함
+
+이 조건을 만족시키려면 tf.keras.utils.categorical( ) 함수를 적용해야 함
+
+이에 따라 Y 값의 형태는 다음과 같이 변형됨
 
 
 
