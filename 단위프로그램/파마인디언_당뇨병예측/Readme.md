@@ -159,6 +159,8 @@ grid.map(plt.hist, 'plasma',  bins=10)
 plt.show()
 
 ```
+<img src="https://user-images.githubusercontent.com/54765256/90971607-8af7eb00-e54c-11ea-9725-a6e179d9f5b9.png">
+
 
 
 
