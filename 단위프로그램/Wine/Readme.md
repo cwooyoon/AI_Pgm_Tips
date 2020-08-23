@@ -104,17 +104,101 @@ model.fit(X, Y, validation_split=0.2, epochs=200, batch_size=200, verbose=0, cal
         save_best_only=True)
 ```
 
+## 그래프로 확인하기
 
+딥러닝 프레임워크가 만들어 낸 모델을 업데이트 하는 과정임
 
+이를 위해서는 에포크를 얼마나 지정할지를 결정해야 함
 
+학습을 반복하는 횟수가 너무 적어도 안 되고 또 너무 많아도 과적합을 일으키므로 문제가 있음
 
+모델의 학습 시간에 따른 정확도와 테스트 결과를 그래프를 통해 확인해 보자
 
+다음으로 그래프로 표현하기 위한 라이브러리를 불러오고 오차와 정확도의 값을정함
 
+y_vloss에 테스트셋(33%)으로 실험한 결과의 오차 값을 저장함
 
+y_acc에 학습셋(67%)으로 측정한 정확도의 값을 저장함
 
+```
+# 모델 저장 폴더 설정
+MODEL_DIR = './model/'
+if not os.path.exists(MODEL_DIR):
+   os.mkdir(MODEL_DIR)
 
+# 모델 저장 조건 설정
+modelpath="./model/{epoch:02d}-{val_loss:.4f}.hdf5"
+checkpointer = ModelCheckpoint(filepath=modelpath, monitor='val_loss', verbose=1, save_best_only=True)
 
+# 모델 실행 및 저장
+history = model.fit(X, Y, validation_split=0.33, epochs=3500, batch_size=500)
 
+# y_vloss에 테스트셋으로 실험 결과의 오차 값을 저장
+y_vloss=history.history['val_loss']
+
+# y_acc 에 학습 셋으로 측정한 정확도의 값을 저장
+y_acc=history.history['accuracy']
+
+# x값을 지정하고 정확도를 파란색으로, 오차를 빨간색으로 표시
+x_len = numpy.arange(len(y_acc))
+plt.plot(x_len, y_vloss, "o", c="red", markersize=3)
+plt.plot(x_len, y_acc, "o", c="blue", markersize=3)
+
+plt.show()
+```
+
+그림 14-1  학습 진행에 따른 학습셋과 테스트셋의 정확도 그래프
+
+<img src="https://user-images.githubusercontent.com/54765256/90976519-d0caa880-e578-11ea-8b53-50b48776220d.png">
+
+## 학습의 자동 중단
+
+학습이 진행될수록 학습셋의 정확도는 올라가지만 과적합 때문에 테스트셋의 실험 결과는 점점 나빠지게 됨
+
+EarlyStopping( ) 함수 :
+
+     케라스에는 이렇게 학습이 진행되어도 테스트셋 오차가 줄지 않으면 학습을 멈추게 하는 함수
+
+```
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.callbacks import EarlyStopping
+
+import pandas as pd
+import numpy
+import tensorflow as tf
+
+# seed 값 설정
+seed = 0
+numpy.random.seed(seed)
+tf.compat.v1.set_random_seed(seed)
+
+df_pre = pd.read_csv('../dataset/wine.csv', header=None)
+df = df_pre.sample(frac=0.15)
+
+dataset = df.values
+X = dataset[:,0:12]
+Y = dataset[:,12]
+
+model = Sequential()
+model.add(Dense(30,  input_dim=12, activation='relu'))
+model.add(Dense(12, activation='relu'))
+model.add(Dense(8, activation='relu'))
+model.add(Dense(1, activation='sigmoid'))
+
+model.compile(loss='binary_crossentropy',
+           optimizer='adam',
+           metrics=['accuracy'])
+
+# 자동 중단 설정
+early_stopping_callback = EarlyStopping(monitor='val_loss', patience=100)
+
+# 모델 실행
+model.fit(X, Y, validation_split=0.2, epochs=2000, batch_size=500, callbacks=[early_stopping_callback])
+
+# 결과 출력
+print("\n Accuracy: %.4f" % (model.evaluate(X, Y)[1]))
+```
 
 
 
