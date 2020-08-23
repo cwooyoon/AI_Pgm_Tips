@@ -24,7 +24,7 @@ dataset/pima-indians-diabetes.csv
  
 UCI 데이터 저장소 참조
 
-http://archieve.ics.uci.edu
+http://archive.ics.uci.edu
 
 ## 피마 인디언 데이터 분석하기
 
