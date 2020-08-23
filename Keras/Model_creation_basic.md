@@ -29,3 +29,14 @@ Optimizer
 
 <img src="https://user-images.githubusercontent.com/54765256/90970832-9a733600-e544-11ea-8f6f-164da1f9e35c.png">
 
+1 epoch
+
+학습 프로세스가 모든 샘플에 대해 한 번 실행되는 것
+
+batch size
+
+샘플을 한번에 몇개씩 처리할지 정함
+
+너무 크면 학습 속도가 느려짐
+
+너무 작으면 각 실행 값의 편차가 생겨서 전체 결과값이 불안정 해짐
