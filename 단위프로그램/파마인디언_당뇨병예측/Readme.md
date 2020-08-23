@@ -161,7 +161,9 @@ plt.show()
 ```
 <img src="https://user-images.githubusercontent.com/54765256/90971607-8af7eb00-e54c-11ea-9725-a6e179d9f5b9.png">
 
+## Code
 
+<img src="https://user-images.githubusercontent.com/54765256/90972214-0dcf7480-e552-11ea-8b5c-a581b0118a20.png">
 
 
 
