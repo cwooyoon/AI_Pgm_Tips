@@ -160,7 +160,9 @@ k겹 교차 검증 :
 그림 13-5  5겹 교차 검증의 도식
 
 <img src="https://user-images.githubusercontent.com/54765256/90975671-5d716880-e571-11ea-9861-a86ce9439757.png">
+
 ```
+
 from sklearn.model_selection import StratifiedKFold
 
 # 10개의 파일로 쪼갬
@@ -185,6 +187,7 @@ for train, test in skf.split(X, Y):
 
 # 결과 출력
 print("\n %.f fold accuracy:" % n_fold, accuracy)
+
 ```
 
 
