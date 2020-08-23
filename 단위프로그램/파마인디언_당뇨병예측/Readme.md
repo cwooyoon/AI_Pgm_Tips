@@ -36,9 +36,22 @@ http://archive.ics.uci.edu
 
 <img src="https://user-images.githubusercontent.com/54765256/90971022-b7106d80-e546-11ea-9349-cea9574b7a71.png">
 
+## pandas를 활용한 데이터 조사
 
+데이터를 다룰 때에는 데이터를 다루기 위해 만들어진 라이브러리를 사용하는 것이 좋음
 
+파이썬 데이터 관련 라이브러리 중 pandas를 사용해 데이터를 불러와 보겠음(run_project/02_Pima_Indian.ipynb)
 
+```
+# pandas 라이브러리를 불러옵니다.
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# 피마 인디언 당뇨병 데이터셋을 불러옵니다. 불러올 때 각 컬럼에 해당하는 이름을 지정합니다.
+df = pd.read_csv('../dataset/pima-indians-diabetes.csv',
+               names = ["pregnant", "plasma", "pressure", "thickness", "insulin", "BMI", "pedigree", "age", "class"])
+```
 
 
 
