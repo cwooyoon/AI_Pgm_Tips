@@ -1,7 +1,7 @@
 # Keras Model
 
 ## Basic structure
-'''
+```
 from keras.models import Sequential, load_model
 from keras.layers.core import Dense
 from sklearn.preprocessing import LabelEncoder
@@ -49,4 +49,4 @@ model = load_model('my_model.h5') # 모델을 새로 불러옴
 
 print("\n Test Accuracy: %.4f" % (model.evaluate(X_test, Y_test)[1]))  # 불러온 모델로 테스트 실행
 
-'''
+```
