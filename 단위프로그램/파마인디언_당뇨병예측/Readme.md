@@ -50,12 +50,37 @@ import seaborn as sns
 
 # 피마 인디언 당뇨병 데이터셋을 불러옵니다. 불러올 때 각 컬럼에 해당하는 이름을 지정합니다.
 df = pd.read_csv('../dataset/pima-indians-diabetes.csv',
-               names = ["pregnant", "plasma", "pressure", "thickness", "insulin", "BMI", "pedigree", "age", "class"])
+               names = ["pregnant", "plasma", "pressure", "thickness", "insulin", 
+               "BMI", "pedigree", "age", "class"])
 ```
 
+Csv :
 
+     comma separated values file의 약자로, 콤마(,)로 구분된 데이터들의 모음이란 뜻
+     
+헤더(header)  :
 
+     csv 파일에는 데이터를 설명하는 한 줄이 파일 맨 처음에 나옴
+     
+우리가 가진 csv 파일에는 헤더가 없음
 
+이에 names라는 함수를 통해 속성별 키워드를 지정해 줌
+
+이제 불러온 데이터의 내용을 간단히 확인하고자 head( ) 함수를 이용하여 데이터의 첫 다섯 줄을 불러옴
+
+```
+# 처음 5줄을 봅니다.
+print(df.head(5))
+
+# 데이터의 전반적인 정보를 확인해 봅니다.
+print(df.info())
+
+# 각 정보별 특징을 좀더 자세히 출력합니다.
+print(df.describe())
+
+# 데이터 중 임신 정보와 클래스 만을 출력해 봅니다.
+print(df[['plasma', 'class']])
+```
 
 
 
