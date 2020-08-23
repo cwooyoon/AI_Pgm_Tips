@@ -97,8 +97,24 @@ array(['Iris-setosa', 'Iris-versicolor','Iris-virginica'])가 array([1,2,3])로 
 
 이에 따라 Y 값의 형태는 다음과 같이 변형됨
 
+## Model
+```
+# 모델의 설정
+model = Sequential()
+model.add(Dense(16,  input_dim=4, activation='relu'))
+model.add(Dense(3, activation='softmax'))
 
+# 모델 컴파일
+model.compile(loss='categorical_crossentropy',
+            optimizer='adam',
+            metrics=['accuracy'])
 
+# 모델 실행
+model.fit(X, Y_encoded, epochs=50, batch_size=1)
+
+# 결과 출력
+print("\n Accuracy: %.4f" % (model.evaluate(X, Y_encoded)[1]))
+```
 
 
 
