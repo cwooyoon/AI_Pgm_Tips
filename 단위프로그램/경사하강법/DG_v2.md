@@ -59,6 +59,7 @@ plt.scatter(x, y)
 plt.show()
 ```
 <img src="https://user-images.githubusercontent.com/54765256/91018042-0380a980-e62a-11ea-817b-0764920ce7ca.png">
+
 ```
 #리스트로 되어 있는 x와 y값을 넘파이 배열로 바꾸어 줍니다.(인덱스를 주어 하나씩 불러와 계산이 가능해 지도록 하기 위함입니다.)
 x_data = np.array(x)
@@ -85,6 +86,7 @@ for i in range(epochs): # epoch 수 만큼 반복
     if i % 100 == 0:    # 100번 반복될 때마다 현재의 a값, b값을 출력합니다.
         print("epoch=%.f, 기울기=%.04f, 절편=%.04f" % (i, a, b))
 ```
+
 ```
 epoch=0, 기울기=27.8400, 절편=5.4300
 epoch=100, 기울기=7.0739, 절편=50.5117
@@ -108,6 +110,7 @@ epoch=1800, 기울기=2.3000, 절편=79.0000
 epoch=1900, 기울기=2.3000, 절편=79.0000
 epoch=2000, 기울기=2.3000, 절편=79.0000
 ```
+
 ```
 # 앞서 구한 기울기와 절편을 이용해 그래프를 그려 봅니다.
 y_pred = a * x_data + b
@@ -115,6 +118,7 @@ plt.scatter(x, y)
 plt.plot([min(x_data), max(x_data)], [min(y_pred), max(y_pred)])
 plt.show()
 ```
+
 <img src="https://user-images.githubusercontent.com/54765256/91018269-55c1ca80-e62a-11ea-8b60-1b754d17a630.png">
 
 
