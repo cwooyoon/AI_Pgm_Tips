@@ -41,3 +41,7 @@ plt.show()
 
 
 ```
+
+<img src="https://user-images.githubusercontent.com/54765256/94352737-e6fde400-00a3-11eb-916b-c94cb179b2bb.png">
+
+
